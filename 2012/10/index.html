@@ -7,13 +7,17 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
    	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
+    <!-- This design is already dark. Without this declaration, Chrome on Android
+         applies its Auto Dark Theme and inverts parts of it. See custom.css. -->
+    <meta name="color-scheme" content="dark" />
+
     <title>October, 2012 | AUBGTalks</title>
 
 	<link rel="stylesheet" type="text/css" href="../../wp-content/themes/videozoom/style.css" media="screen" />
 	<link href='https://fonts.googleapis.com/css?family=Ropa+Sans' rel='stylesheet' type='text/css'>
 
 	<link rel="canonical" href="../../the-successes-and-challenges-of-balkan-cooperation/" />
-<!-- All in One SEO Pack 2.2.7.3 by Michael Torbert of Semper Fi Web Design[326,371] -->
+<!-- All in One SEO Pack 2.2.7.3 by Michael Torbert of Semper Fi Web Design[543,588] -->
 <meta name="keywords" itemprop="keywords" content="balkan wars,balkans,cooperation,politics,thrasyvoulos stamatopoulos,ulyana bogdanska,deloitte,finance,crisis,dimitar bechev,europe" />
 <meta name="robots" content="noindex,follow" />
 
@@ -50,6 +54,7 @@ img.emoji {
 <link rel="shortcut icon" href="../../wp-content/uploads/favicon.ico" type="image/x-icon" /><style type="text/css">#featPosts .cover{width:460px;}
 #featPosts .cover{height:260px;}
 </style>
+<meta property="og:image" content="https://aubgtalks.stoilms.com/wp-content/uploads/AUBGTalks-Logo-OG-Image.jpg" />
 </head>
 
 <body class="archive date">
@@ -318,6 +323,61 @@ img.emoji {
 
 </div><!-- /#container -->
 
+<!-- BEGIN touch navigation (added for the static archive) -->
+<script>
+/*
+ * The menu is the Dynamic Drive slide menu: submenus open on hover, and
+ * script.js also binds click to hide them. A tap fires mouseover (opening the
+ * submenu), then click (hiding it), then follows the link - so on a phone the
+ * submenu flashes and you land on the parent page, unable to reach its
+ * children.
+ *
+ * On devices that cannot hover, take the menu over: drop the library's hover
+ * and click handlers, then make the first tap on a parent open its submenu and
+ * the second tap follow the link. Open state is tracked explicitly rather than
+ * read back from visibility - the library's animation makes the submenu
+ * visible before the click handler ever runs, so visibility lies.
+ *
+ * "Categories" has an empty href and cannot navigate, so for parents like it
+ * the second tap closes the submenu again instead.
+ *
+ * Desktop is untouched: the guard below returns immediately wherever a real
+ * pointer exists, leaving the original hover behaviour in place.
+ */
+(function () {
+	if (!window.matchMedia || !window.matchMedia('(hover: none)').matches) { return; }
+	if (!window.jQuery) { return; }
+
+	jQuery(function ($) {
+		var menus   = '#menu, #topNav';
+		var parents = $(menus).find('li').has('ul');
+
+		parents.off('mouseenter mouseleave click');
+
+		parents.children('a').on('click', function (e) {
+			var li   = $(this).parent();
+			var sub  = li.children('ul:eq(0)');
+			var open = li.data('tnOpen') === true;
+
+			if (open && $(this).attr('href')) { return; }   // second tap: follow the link
+
+			e.preventDefault();
+			e.stopPropagation();
+			parents.not(li).data('tnOpen', false).children('ul').hide();
+
+			if (open) { li.data('tnOpen', false); sub.hide(); }
+			else      { li.data('tnOpen', true);  sub.show(); }
+		});
+
+		$(document).on('click', function (e) {
+			if (!$(e.target).closest(menus).length) {
+				parents.data('tnOpen', false).children('ul').hide();
+			}
+		});
+	});
+}());
+</script>
+<!-- END touch navigation -->
 <!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "cffcbd0e13ab4d19b4586152055ce8d3"}'></script><!-- End Cloudflare Web Analytics -->
 </body>
 </html>

@@ -33,3 +33,52 @@ div.single-page > h1 {
 #logo span {
 	color: #5c5;
 }
+
+/* --- Added for the static archive ------------------------------------------
+ *
+ * Chrome on Android (and some other mobile browsers) apply an automatic dark
+ * mode to pages that do not declare which colour schemes they support. The
+ * algorithm assumes the page is light and inverts it - which wrecks a design
+ * that was already dark. It turned the slider container and the "Recent Posts"
+ * heading white behind white text, and gave the current menu item a white
+ * background.
+ *
+ * `only dark` states that this page is dark AND forbids the browser from
+ * overriding that. Plain `dark` alone does not reliably stop the auto-darkening.
+ * It also gets us dark scrollbars and form controls for free.
+ */
+:root {
+	color-scheme: only dark;
+}
+
+/* --- Floated images on narrow phones ---------------------------------------
+ *
+ * The team pages lay each person out as a 200px headshot floated left with
+ * their name and bio flowing alongside. Below 480px the theme narrows the
+ * content column to 300px, which leaves about 85px for that text - so it
+ * wraps to two or three characters a line and spills awkwardly past the photo.
+ *
+ * Under 480px, stop the floating: the photo takes the column and the text sits
+ * beneath it. 480px is the theme's own breakpoint, and at every width above it
+ * the column is 450px or wider, where the float still reads well - so the
+ * desktop and tablet layouts are untouched.
+ */
+@media screen and (max-width: 479px) {
+	#content img.alignleft,
+	#content img.alignright {
+		float: none;
+		display: block;
+		margin: 0 0 10px;
+		max-width: 100%;
+		height: auto;
+	}
+
+	/* The team pages carry inline padding-left (210px for the role, 30px for the
+	 * quotes) written into the content in 2013 to clear that floated photo. With
+	 * the float gone it only eats the column, so drop it. !important is the only
+	 * way to beat an inline style; the attribute selector keeps it to exactly the
+	 * elements that have one. */
+	#content .entry [style*="padding-left"] {
+		padding-left: 0 !important;
+	}
+}
