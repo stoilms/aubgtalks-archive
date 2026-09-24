@@ -10,10 +10,9 @@
  * Included on every page, so the token and region live here only.
  */
 (function () {
-  var POSTHOG_TOKEN = 'phc_REPLACE_ME';
+  var POSTHOG_TOKEN = 'phc_wDojbrUaCKSiXSsqKkkyN4VUQzYqNn7G7tkfHqHHfULZ';
   var POSTHOG_HOST = 'https://eu.i.posthog.com'; // US projects: https://us.i.posthog.com
 
-  if (POSTHOG_TOKEN.indexOf('REPLACE_ME') !== -1) return;
   if (location.hostname !== 'aubgtalks.stoilms.com') return;
 
   var script = document.createElement('script');
