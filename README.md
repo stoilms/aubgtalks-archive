@@ -12,6 +12,9 @@ Static HTML, served by GitHub Pages. There is no build step in CI, no framework 
 
 The original was a WordPress site. Rather than port the content to a modern static site generator, which would have meant rebuilding the theme and losing the original design, the WordPress install is kept offline as an editing tool and the rendered pages are crawled into flat HTML. The archive therefore looks and behaves as the site did, down to the layout and typography of its 2013 theme.
 
+> [!WARNING]
+> PostHog was added directly to the HTML in this repository, not to the offline WordPress install. Re-crawling the WordPress install and committing the output will drop the PostHog `<script>` line from every page, and may delete `wp-content/analytics/posthog.js` too. Until the task under [To do](#to-do) is done, re-add both after any re-crawl, or copy the line from the existing pages. It goes straight after the Cloudflare Web Analytics snippet.
+
 URLs are preserved from the original site, so links and citations from that era still resolve.
 
 ## What has changed from the original
@@ -23,6 +26,10 @@ URLs are preserved from the original site, so links and citations from that era 
 - Self-referencing links point at the current domain.
 
 Content, design, layout and images are otherwise untouched. Some outbound links have inevitably rotted in the years since; the archive notice says so.
+
+## To do
+
+- [ ] Add PostHog to the offline WordPress install so a re-crawl keeps it. Output the same line as the static pages, `<script src="/wp-content/analytics/posthog.js" async></script>`, straight after the Cloudflare Web Analytics snippet. Copy `wp-content/analytics/posthog.js` into the install's `wp-content` so the crawl publishes it. Then remove the warning under [What this repository is](#what-this-repository-is).
 
 ## Contributing
 
