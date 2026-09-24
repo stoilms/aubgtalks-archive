@@ -18,7 +18,7 @@ URLs are preserved from the original site, so links and citations from that era 
 
 - An archive notice appears at the top of every page, explaining that the site is no longer maintained.
 - Comment submission and search were removed. They required a server; existing comments remain as static text.
-- Google Analytics was removed. The archive uses [Cloudflare Web Analytics](https://www.cloudflare.com/web-analytics/), which is cookieless and collects no personal data — so there is no consent banner.
+- Google Analytics was removed. The archive uses [Cloudflare Web Analytics](https://www.cloudflare.com/web-analytics/) and [PostHog](https://posthog.com/) in cookieless mode, neither of which stores anything in the visitor's browser or builds personal profiles — so there is no consent banner. The PostHog settings live in `wp-content/analytics/posthog.js`, which every page loads.
 - A defunct Google Plus script was removed, and resources that loaded over plain HTTP were switched to HTTPS.
 - Self-referencing links point at the current domain.
 
